@@ -24,7 +24,7 @@ postURL   = "http://%s/cgi-bin/postfacts.py" % satellite
 systemID  = xmlrpclib.loads(open("/etc/sysconfig/rhn/systemid").read())[0][0]['system_id'].split('-')[1]
 
 # Fetch Facts
-facts = dict(item.split(" => ") for item in os.popen('/usr/bin/facter').read().splitlines())
+facts = dict(item.split(" => ") for item in os.popen('/usr/bin/facter').read().splitlines() if len(item.split(" => ")) is 2)
 facts['systemID'] = systemID
 
 facts = json.dumps(facts)
